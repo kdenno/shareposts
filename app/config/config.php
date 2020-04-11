@@ -9,6 +9,8 @@ foreach($db_config as $key => $value){
 // App Root
 define('APPROOT', dirname(dirname(__FILE__)));
 // URL Root
-define('URLROOT', 'http://localhost/shareposts/');
+define('URLROOT', 'http://localhost/shareposts');
 // Site Name
 define('SITENAME', 'Shareposts');
+// version
+define('VERSION', '1.0.0');

@@ -10,11 +10,18 @@ class Pages extends Controller
   {
     // since index is the default method 
     $posts = $this->postModel->getPosts();
-    $data = ['title' => SITENAME];
+    $data = [
+      'title' => SITENAME,
+      'description' => 'A simple social network built on top of DinoMVC framework'
+    ];
     $this->loadView('pages/index', $data);
   }
   public function about()
   {
-    $this->loadView('pages/about');
+    $data = [
+      'title' => 'About',
+      'description' => 'A simple social network built on top of DinoMVC framework to for users to share posts wit other users'
+    ];
+    $this->loadView('pages/about', $data);
   }
 }
