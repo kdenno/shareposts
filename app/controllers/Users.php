@@ -4,6 +4,7 @@ class Users extends Controller
 {
   public function __construct()
   {
+    $this->userModel = $this->model('User');
   }
   public function register()
   {
@@ -23,6 +24,12 @@ class Users extends Controller
       ];
       if (empty($data['name'])) {
         $data['name_err'] = 'Please enter name';
+      }else {
+        // check if email already exists
+      if ($this->userModel->checkEmail($data['email'])) {
+        $data['email_err'] = 'Email already exists';
+      }
+
       }
       if (empty($data['email'])) {
         $data['email_err'] = 'Please enter Email';
@@ -32,11 +39,11 @@ class Users extends Controller
       }
       if (empty($data['confirm_password'])) {
         $data['confirm_password_err'] = 'Please enter data';
-      }else{
-      if($data['password'] != $data['confirm_password']){
-        $data['confirm_password_err'] = 'Password miss-match';
+      } else {
+        if ($data['password'] != $data['confirm_password']) {
+          $data['confirm_password_err'] = 'Password miss-match';
+        }
       }
-    }
 
       if (empty($data['name_err']) && empty($data['email_err']) && empty($data['password_err']) && empty($data['confirm_password_err'])) {
         die('success');
@@ -65,35 +72,35 @@ class Users extends Controller
     // Check for POST
     if ($_SERVER['REQUEST_METHOD'] == 'POST') {
       // Process form
-        // Sanitize POST data
-        $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
-        
-        // Init data
-        $data =[
-          'email' => trim($_POST['email']),
-          'password' => trim($_POST['password']),
-          'email_err' => '',
-          'password_err' => '',      
-        ];
+      // Sanitize POST data
+      $_POST = filter_input_array(INPUT_POST, FILTER_SANITIZE_STRING);
 
-        // Validate Email
-        if(empty($data['email'])){
-          $data['email_err'] = 'Pleae enter email';
-        }
+      // Init data
+      $data = [
+        'email' => trim($_POST['email']),
+        'password' => trim($_POST['password']),
+        'email_err' => '',
+        'password_err' => '',
+      ];
 
-        // Validate Password
-        if(empty($data['password'])){
-          $data['password_err'] = 'Please enter password';
-        }
+      // Validate Email
+      if (empty($data['email'])) {
+        $data['email_err'] = 'Pleae enter email';
+      }
 
-        // Make sure errors are empty
-        if(empty($data['email_err']) && empty($data['password_err'])){
-          // Validated
-          die('SUCCESS');
-        } else {
-          // Load view with errors
-          $this->loadView('users/login', $data);
-        }
+      // Validate Password
+      if (empty($data['password'])) {
+        $data['password_err'] = 'Please enter password';
+      }
+
+      // Make sure errors are empty
+      if (empty($data['email_err']) && empty($data['password_err'])) {
+        // Validated
+        die('SUCCESS');
+      } else {
+        // Load view with errors
+        $this->loadView('users/login', $data);
+      }
     } else {
       // Init data
       $data = [
