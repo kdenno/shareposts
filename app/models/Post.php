@@ -24,8 +24,19 @@ class Post
     $query = 'INSERT INTO posts(user_id, title, body) VALUES(:user_id, :title, :body)';
     return $this->db->query($query)->bind(':user_id', $data['userId'])->bind(':title', $data['title'])->bind(':body', $data['body'])->execute();
   }
-  public function getPostById($id) {
+  public function getPostById($id)
+  {
     $query = "SELECT * FROM posts WHERE id = :id";
     return $this->db->query($query)->bind(':id', $id)->getSingle();
+  }
+  public function updatePost($data)
+  {
+    $query = 'UPDATE posts SET title = :title, body = :body WHERE id = :id';
+    return $this->db->query($query)->bind(':id', $data['id'])->bind(':title', $data['title'])->bind(':body', $data['body'])->execute();
+  }
+  public function deletePost($id)
+  {
+    $query = "DELETE FROM posts WHERE id=:id";
+    return $this->db->query($query)->bind(':id', $id)->execute();
   }
 }
