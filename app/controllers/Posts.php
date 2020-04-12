@@ -2,6 +2,7 @@
 class Posts extends Controller
 {
   private $postModel;
+  private $userModel;
   public function __construct()
   {
 
@@ -12,6 +13,7 @@ class Posts extends Controller
 
     // get access to the model
     $this->postModel = $this->model('Post');
+    $this->userModel = $this->model('User');
   }
   public function index()
   {
@@ -57,5 +59,16 @@ class Posts extends Controller
       $data = ['title' => '', 'body' => ''];
       $this->loadView('posts/add', $data);
     }
+  }
+  public function show($id) {
+    $data = [];
+    $postData = $this->postModel->getPostById($id[0]);
+    // get user data
+    $userData = $this->userModel->getUserById($postData->user_id);
+    $data = [
+      'post' => $postData,
+      'user' => $userData
+    ];
+    $this->loadView('posts/show', $data);
   }
 }

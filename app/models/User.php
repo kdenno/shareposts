@@ -28,4 +28,10 @@ class User
       return false;
     };
   }
+  public function getUserById($id)
+  {
+    $query = "SELECT * FROM users WHERE id = :id";
+    return $this->db->query($query)->bind(':id', $id)->getSingle();
+    
+  }
 }

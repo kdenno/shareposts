@@ -24,4 +24,8 @@ class Post
     $query = 'INSERT INTO posts(user_id, title, body) VALUES(:user_id, :title, :body)';
     return $this->db->query($query)->bind(':user_id', $data['userId'])->bind(':title', $data['title'])->bind(':body', $data['body'])->execute();
   }
+  public function getPostById($id) {
+    $query = "SELECT * FROM posts WHERE id = :id";
+    return $this->db->query($query)->bind(':id', $id)->getSingle();
+  }
 }
