@@ -3,7 +3,10 @@ class Posts extends Controller {
   private $model;
   public function __construct()
   {
-    $this->model = $this->model('Post');
+    // check if user is logged in
+    if(!isLoggedIn()){
+      redirect('users/login');
+    }
     
   }
   public function index() {

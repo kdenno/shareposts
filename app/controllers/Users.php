@@ -138,7 +138,7 @@ class Users extends Controller
       'user_email'=> $user->email,
     ];
    createSession($data);
-   redirect('pages/index');
+   redirect('posts');
   }
 
   public function logOut() {
@@ -147,7 +147,5 @@ class Users extends Controller
    redirect('pages/index');
   }
 
-  public function isLoggedIn() {
-   return isset($_SESSION['user_id']);
-  }
+ 
 }

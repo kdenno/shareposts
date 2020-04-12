@@ -14,3 +14,7 @@ function destroySession($data){
   session_destroy();
   return true;
 }
+
+function isLoggedIn() {
+  return isset($_SESSION['user_id']);
+ }
