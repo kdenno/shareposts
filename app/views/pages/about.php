@@ -1,5 +1,5 @@
 <?php
-require APPROOT.'/views/inc/header.php';
+getHeader();
 echo $data['title'];
 ?>
 <p><?php echo $data['description']; ?></p>

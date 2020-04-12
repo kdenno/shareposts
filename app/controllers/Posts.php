@@ -6,5 +6,8 @@ class Posts extends Controller {
     $this->model = $this->model('Post');
     
   }
+  public function index() {
+    $data=[];
+    $this->loadView('posts/index', $data);
+  }
 }
-?>
