@@ -19,4 +19,9 @@ class Post
                             ON posts.user_id = users.id
                             ORDER BY posts.created_at DESC')->resultSet();
   }
+  public function insertPost($data)
+  {
+    $query = 'INSERT INTO posts(user_id, title, body) VALUES(:user_id, :title, :body)';
+    return $this->db->query($query)->bind(':user_id', $data['userId'])->bind(':title', $data['title'])->bind(':body', $data['body'])->execute();
+  }
 }
