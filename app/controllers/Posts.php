@@ -22,4 +22,9 @@ class Posts extends Controller
     ];
     $this->loadView('posts/index', $data);
   }
+  public function add()
+  {
+    $data = ['title' => '', 'body' => '' ];
+    $this->loadView('posts/add', $data);
+  }
 }

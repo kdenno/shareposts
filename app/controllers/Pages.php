@@ -9,6 +9,9 @@ class Pages extends Controller
   public function index()
   {
     // since index is the default method 
+    if(isLoggedIn()) {
+      redirect('posts');
+    }
     $posts = $this->postModel->getPosts();
     $data = [
       'title' => SITENAME,
