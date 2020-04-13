@@ -1,6 +1,6 @@
 # SharePosts
 
-> A CRUD application built on top of [DinoMVC](github.com/kdenno/DinoMVC) framework with user profile management
+> A CRUD application built on top of [DinoMVC](https://github.com/kdenno/DinoMVC) framework with user profile management
 
 ## Usage
 ```
